@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP app to Azure Web App - sybasewebapp
+name: Build and deploy by subhash for  app to  Azure Web App - sybasewebapp
 
 on:
   push:
@@ -53,4 +53,5 @@ jobs:
           app-name: 'sybasewebapp'
           slot-name: 'Production'
           package: .
+
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_09C152ECCE5D4934B7ADA06A5B91ADDB }}
