@@ -1,24 +1,517 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+/* =========================================================
+   Developer Landing Page
+   ASP.NET MVC compatible
+   Add this CSS to Content/Site.css
+   ========================================================= */
+
+.dev-page {
+    --dev-bg: #07111f;
+    --dev-bg-light: #0d2038;
+    --dev-card: rgba(255, 255, 255, 0.07);
+    --dev-line: rgba(255, 255, 255, 0.13);
+    --dev-text: #f7fbff;
+    --dev-muted: #aabbd0;
+    --dev-blue: #38bdf8;
+    --dev-cyan: #22d3ee;
+    --dev-purple: #8b5cf6;
+    --dev-green: #34d399;
+
+    position: relative;
+    overflow: hidden;
+    margin: 0 -15px;
+    padding: 70px 15px 90px;
+    color: var(--dev-text);
+    background:
+        radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.20), transparent 27%),
+        radial-gradient(circle at 88% 12%, rgba(139, 92, 246, 0.22), transparent 29%),
+        radial-gradient(circle at 50% 100%, rgba(34, 211, 238, 0.13), transparent 34%),
+        linear-gradient(135deg, var(--dev-bg), var(--dev-bg-light));
+    min-height: calc(100vh - 100px);
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.dev-page:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .12;
+    background-image:
+        linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+    background-size: 42px 42px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.dev-hero,
+.dev-section,
+.dev-about {
+    position: relative;
+    z-index: 1;
+    width: min(1120px, 100%);
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.dev-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(330px, .75fr);
+    align-items: center;
+    gap: 55px;
+    min-height: 620px;
+}
+
+.dev-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 13px;
+    border: 1px solid rgba(52, 211, 153, .28);
+    border-radius: 999px;
+    background: rgba(52, 211, 153, .08);
+    color: #91f3c7;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+.dev-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dev-green);
+    box-shadow: 0 0 15px var(--dev-green);
+}
+
+.dev-hero h1 {
+    margin: 24px 0 22px;
+    max-width: 760px;
+    font-size: clamp(45px, 6vw, 76px);
+    line-height: .99;
+    letter-spacing: -3px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.dev-hero h1 span {
+    display: block;
+    background: linear-gradient(90deg, #ffffff 0%, #7dd3fc 46%, #c4b5fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.dev-lead {
+    max-width: 680px;
+    margin: 0;
+    color: var(--dev-muted);
+    font-size: 18px;
+    line-height: 1.75;
+}
+
+.dev-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.dev-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 19px;
+    border: 1px solid var(--dev-line);
+    border-radius: 12px;
+    background: rgba(255,255,255,.06);
+    color: #fff !important;
+    text-decoration: none !important;
+    font-weight: 700;
+    transition: all .25s ease;
+}
+
+.dev-btn:hover {
+    transform: translateY(-3px);
+    color: #fff !important;
+    border-color: rgba(125,211,252,.55);
+    box-shadow: 0 16px 35px rgba(0,0,0,.28);
+}
+
+.dev-btn-primary {
+    border-color: transparent;
+    color: #03111d !important;
+    background: linear-gradient(135deg, #67e8f9, #60a5fa, #a78bfa);
+}
+
+.dev-btn-primary:hover {
+    color: #03111d !important;
+}
+
+.dev-tech-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 27px;
+}
+
+.dev-tech-row span {
+    padding: 7px 11px;
+    border: 1px solid var(--dev-line);
+    border-radius: 999px;
+    color: #cce8ff;
+    background: rgba(255,255,255,.04);
+    font-size: 12px;
+}
+
+
+/* Profile card */
+
+.dev-profile-card {
+    position: relative;
+    padding: 24px;
+    border: 1px solid var(--dev-line);
+    border-radius: 28px;
+    background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.035));
+    box-shadow: 0 35px 90px rgba(0,0,0,.38);
+    backdrop-filter: blur(18px);
+}
+
+.dev-profile-card:before {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    right: -55px;
+    top: -55px;
+    border-radius: 50%;
+    background: rgba(56,189,248,.25);
+    filter: blur(55px);
+    pointer-events: none;
+}
+
+.dev-photo-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    border-radius: 21px;
+    border: 1px solid rgba(255,255,255,.18);
+    background:
+        radial-gradient(circle at 50% 30%, rgba(56,189,248,.35), transparent 25%),
+        linear-gradient(145deg, #172554, #0f172a 70%);
+}
+
+.dev-photo {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.dev-photo-fallback {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
+    font-weight: 900;
+    color: white;
+    background: linear-gradient(145deg, #0284c7, #7c3aed);
+}
+
+.dev-photo-glow {
+    position: absolute;
+    z-index: 3;
+    width: 190px;
+    height: 190px;
+    left: 50%;
+    bottom: -125px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(34,211,238,.25);
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+.dev-profile-info {
+    position: relative;
+    z-index: 4;
+    padding: 20px 4px 3px;
+}
+
+.dev-profile-label,
+.dev-kicker {
+    margin: 0 0 6px;
+    color: var(--dev-blue);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.dev-profile-info h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.dev-role {
+    margin: 6px 0 0;
+    color: #8fdcff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.dev-description {
+    margin: 11px 0 0;
+    color: var(--dev-muted);
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.dev-socials {
+    display: flex;
+    gap: 9px;
+    margin-top: 17px;
+}
+
+.dev-social {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--dev-line);
+    border-radius: 11px;
+    background: rgba(255,255,255,.05);
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 13px;
+    font-weight: 800;
+    transition: .2s ease;
+}
+
+.dev-social:hover {
+    transform: translateY(-2px);
+    border-color: rgba(125,211,252,.5);
+    background: rgba(255,255,255,.10);
+}
+
+
+/* Expertise */
+
+.dev-section {
+    margin-top: 65px;
+}
+
+.dev-section-heading {
+    margin-bottom: 25px;
+}
+
+.dev-section-heading h2,
+.dev-about h2 {
+    margin: 6px 0 7px;
+    color: #fff;
+    font-size: 35px;
+    letter-spacing: -1px;
+}
+
+.dev-section-heading > p:last-child {
+    margin: 0;
+    color: var(--dev-muted);
+}
+
+.dev-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+.dev-card {
+    min-height: 220px;
+    padding: 24px;
+    border: 1px solid var(--dev-line);
+    border-radius: 21px;
+    background: rgba(255,255,255,.055);
+    transition: .25s ease;
+}
+
+.dev-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(125,211,252,.35);
+    background: rgba(255,255,255,.085);
+    box-shadow: 0 18px 45px rgba(0,0,0,.20);
+}
+
+.dev-card-icon {
+    display: grid;
+    place-items: center;
+    width: 47px;
+    height: 47px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(125,211,252,.20);
+    border-radius: 13px;
+    background: linear-gradient(135deg, rgba(56,189,248,.18), rgba(139,92,246,.20));
+    font-size: 21px;
+}
+
+.dev-card h3 {
+    margin: 0 0 9px;
+    color: #fff;
+    font-size: 19px;
+}
+
+.dev-card p {
+    margin: 0;
+    color: var(--dev-muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* Featured project */
+
+.dev-project {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 30px;
+    border: 1px solid rgba(125,211,252,.20);
+    border-radius: 24px;
+    background:
+        linear-gradient(135deg, rgba(56,189,248,.09), rgba(139,92,246,.10)),
+        rgba(255,255,255,.045);
+}
+
+.dev-project-icon {
+    flex: 0 0 70px;
+    display: grid;
+    place-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #0ea5e9, #7c3aed);
+    box-shadow: 0 12px 35px rgba(56,189,248,.20);
+    font-size: 31px;
+}
+
+.dev-project-content h2 {
+    margin: 4px 0 8px;
+    color: #fff;
+    font-size: 28px;
+}
+
+.dev-project-content > p {
+    max-width: 760px;
+    margin: 0;
+    color: var(--dev-muted);
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.dev-project-flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 18px;
+}
+
+.dev-project-flow span {
+    padding: 7px 11px;
+    border: 1px solid var(--dev-line);
+    border-radius: 9px;
+    background: rgba(255,255,255,.05);
+    color: #d9edff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.dev-project-flow b {
+    color: var(--dev-blue);
+}
+
+
+/* About */
+
+.dev-about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: center;
+    margin-top: 65px;
+    padding-top: 35px;
+    border-top: 1px solid var(--dev-line);
+}
+
+.dev-about h2 {
+    margin-bottom: 0;
+}
+
+.dev-about > p {
+    margin: 0;
+    color: var(--dev-muted);
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 900px) {
+    .dev-page {
+        padding-top: 45px;
+    }
+
+    .dev-hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        min-height: auto;
+    }
+
+    .dev-profile-card {
+        width: min(460px, 100%);
+        margin: 0 auto;
+    }
+
+    .dev-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dev-about {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .dev-page {
+        margin-left: -15px;
+        margin-right: -15px;
+        padding: 35px 15px 65px;
+    }
+
+    .dev-hero h1 {
+        font-size: 47px;
+        letter-spacing: -2px;
+    }
+
+    .dev-lead {
+        font-size: 16px;
+    }
+
+    .dev-profile-card {
+        padding: 17px;
+        border-radius: 22px;
+    }
+
+    .dev-project {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 23px;
+    }
+
+    .dev-section-heading h2,
+    .dev-about h2 {
+        font-size: 29px;
+    }
 }
