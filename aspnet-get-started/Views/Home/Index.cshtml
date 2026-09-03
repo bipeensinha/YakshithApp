@@ -1,29 +1,527 @@
-﻿@{
-    ViewBag.Title = "Test CICD Page";
+@{
+    ViewBag.Title = "Developer | Azure Training 205";
 }
 
-<div class="jumbotron">
-    <h1>This is developed by Robert, Johm,Seni,Bipeen in Class </h1>
-    <p class="lead">Welcome To Azure Training 205</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title</title>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>GitHub</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, Testing CICD.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>My Libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Host your web</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    <style>
+        :root {
+            --bg: #07111f;
+            --bg2: #0c1d33;
+            --card: rgba(255,255,255,.075);
+            --line: rgba(255,255,255,.13);
+            --text: #f7fbff;
+            --muted: #a9bad0;
+            --blue: #38bdf8;
+            --violet: #8b5cf6;
+            --cyan: #22d3ee;
+            --green: #34d399;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 10% 10%, rgba(56,189,248,.18), transparent 28%),
+                radial-gradient(circle at 90% 20%, rgba(139,92,246,.20), transparent 30%),
+                radial-gradient(circle at 50% 100%, rgba(34,211,238,.12), transparent 35%),
+                linear-gradient(135deg, var(--bg), var(--bg2));
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .18;
+            background-image:
+                linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: linear-gradient(to bottom, black, transparent 85%);
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .nav {
+            width: min(1180px, calc(100% - 40px));
+            margin: 20px auto 0;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--line);
+            background: rgba(8,18,32,.58);
+            backdrop-filter: blur(18px);
+            border-radius: 18px;
+            position: sticky;
+            top: 15px;
+            z-index: 20;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            letter-spacing: .3px;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--blue), var(--violet));
+            box-shadow: 0 0 30px rgba(56,189,248,.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .nav-links a:hover { color: white; }
+
+        .hero {
+            width: min(1180px, calc(100% - 40px));
+            margin: 90px auto 0;
+            min-height: 650px;
+            display: grid;
+            grid-template-columns: 1.25fr .75fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 8px 13px;
+            border: 1px solid rgba(52,211,153,.25);
+            border-radius: 999px;
+            background: rgba(52,211,153,.08);
+            color: #8ff1c6;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 14px var(--green);
+        }
+
+        h1 {
+            margin: 22px 0 20px;
+            max-width: 760px;
+            font-size: clamp(46px, 7vw, 82px);
+            line-height: .98;
+            letter-spacing: -4px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #fff, #7dd3fc 45%, #c4b5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-copy {
+            max-width: 680px;
+            color: var(--muted);
+            font-size: 19px;
+            line-height: 1.75;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 13px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 13px 19px;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,.07);
+            font-weight: 750;
+            transition: .25s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            border-color: rgba(125,211,252,.55);
+            box-shadow: 0 15px 40px rgba(0,0,0,.25);
+        }
+
+        .btn-primary {
+            border: none;
+            color: #03111d;
+            background: linear-gradient(135deg, #67e8f9, #60a5fa, #a78bfa);
+        }
+
+        .developer-card {
+            position: relative;
+            padding: 26px;
+            border: 1px solid var(--line);
+            border-radius: 30px;
+            background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.035));
+            box-shadow: 0 35px 90px rgba(0,0,0,.35);
+            backdrop-filter: blur(22px);
+        }
+
+        .developer-card::before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: -55px;
+            right: -45px;
+            background: rgba(56,189,248,.25);
+            filter: blur(55px);
+            border-radius: 50%;
+        }
+
+        .photo-frame {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 23px;
+            border: 1px solid rgba(255,255,255,.18);
+            background:
+                radial-gradient(circle at 50% 30%, #38bdf8, transparent 24%),
+                linear-gradient(145deg, #172554, #0f172a 65%);
+            display: grid;
+            place-items: center;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Fallback avatar is visible until developer-photo.jpg is added. */
+        .avatar-fallback {
+            display: grid;
+            place-items: center;
+            width: 58%;
+            height: 58%;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,.55);
+            background: linear-gradient(145deg, #38bdf8, #7c3aed);
+            font-size: clamp(42px, 6vw, 70px);
+            font-weight: 900;
+            box-shadow: 0 0 70px rgba(56,189,248,.28);
+        }
+
+        .dev-info { padding: 20px 4px 2px; }
+
+        .dev-name {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 850;
+        }
+
+        .dev-role {
+            margin-top: 5px;
+            color: #8fdcff;
+            font-weight: 700;
+        }
+
+        .dev-meta {
+            color: var(--muted);
+            line-height: 1.6;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .socials {
+            display: flex;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .social {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,.05);
+            font-weight: 800;
+        }
+
+        .section {
+            width: min(1180px, calc(100% - 40px));
+            margin: 30px auto 100px;
+        }
+
+        .section-title {
+            margin-bottom: 28px;
+        }
+
+        .section-title span {
+            color: var(--blue);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+        }
+
+        .section-title h2 {
+            margin: 8px 0;
+            font-size: 36px;
+            letter-spacing: -1.5px;
+        }
+
+        .section-title p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            min-height: 220px;
+            padding: 25px;
+            border-radius: 22px;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,.055);
+            transition: .25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            background: rgba(255,255,255,.08);
+            border-color: rgba(125,211,252,.35);
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            background: linear-gradient(135deg, rgba(56,189,248,.2), rgba(139,92,246,.2));
+            border: 1px solid rgba(125,211,252,.2);
+            font-size: 22px;
+        }
+
+        .card h3 { margin: 0 0 10px; font-size: 20px; }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .tech-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .tag {
+            padding: 9px 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: #cfe8ff;
+            background: rgba(255,255,255,.045);
+            font-size: 13px;
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 30px 20px 45px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; margin-top: 60px; }
+            .developer-card { max-width: 500px; margin: auto; }
+            .cards { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            h1 { letter-spacing: -2.5px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav">
+        <a class="brand" href="#">
+            <span class="brand-mark">⚡</span>
+            <span>Azure Developer</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#expertise">Expertise</a>
+            <a href="#project">Project</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" id="about">
+
+            <div>
+                <div class="eyebrow">
+                    <span class="pulse"></span>
+                    Developer Portfolio • Azure Training 205
+                </div>
+
+                <h1>
+                    Building
+                    <span class="gradient-text">modern cloud</span>
+                    experiences.
+                </h1>
+
+                <p class="hero-copy">
+                    Welcome to the developer showcase for the
+                    <strong>Enterprise AI Service Desk</strong>.
+                    This project demonstrates ASP.NET MVC, GitHub, CI/CD,
+                    Azure App Service and modern cloud development practices.
+                </p>
+
+                <div class="buttons">
+                    <a class="btn btn-primary" href="#project">Explore Project →</a>
+                    <a class="btn" href="#expertise">View Expertise</a>
+                </div>
+            </div>
+
+            <aside class="developer-card">
+                <div class="photo-frame">
+                    <!--
+                        Replace /Content/images/developer-photo.jpg
+                        with the developer's actual photo.
+                    -->
+                    <img src="@Url.Content("~/Content/images/developer-photo.jpg")"
+                         alt="Developer photo"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+
+                    <div class="avatar-fallback" style="display:none;">BS</div>
+                </div>
+
+                <div class="dev-info">
+                    <h2 class="dev-name">Bipeen Sinha</h2>
+                    <div class="dev-role">Cloud &amp; Application Developer</div>
+
+                    <p class="dev-meta">
+                        Developer • Azure learner • CI/CD practitioner<br />
+                        Building practical cloud applications with modern development workflows.
+                    </p>
+
+                    <div class="socials">
+                        <a class="social" href="#" aria-label="GitHub">GH</a>
+                        <a class="social" href="#" aria-label="LinkedIn">in</a>
+                        <a class="social" href="#project" aria-label="Project">↗</a>
+                    </div>
+                </div>
+            </aside>
+
+        </section>
+
+        <section class="section" id="expertise">
+            <div class="section-title">
+                <span>What I build</span>
+                <h2>Technology with a purpose.</h2>
+                <p>Designed to look professional while remaining simple to maintain in an ASP.NET MVC project.</p>
+            </div>
+
+            <div class="cards">
+                <article class="card">
+                    <div class="icon">☁</div>
+                    <h3>Azure Cloud</h3>
+                    <p>
+                        Deploying and hosting web applications using Azure App Service,
+                        application configuration and cloud-ready development practices.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="icon">⚙</div>
+                    <h3>CI/CD &amp; Git</h3>
+                    <p>
+                        Connecting source control with deployment workflows so application
+                        changes can move from developer workstation to cloud.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="icon">🤖</div>
+                    <h3>AI Applications</h3>
+                    <p>
+                        Exploring practical AI-powered applications such as an
+                        Enterprise AI Service Desk for IT support scenarios.
+                    </p>
+                </article>
+            </div>
+
+            <div class="tech-strip">
+                <span class="tag">ASP.NET MVC</span>
+                <span class="tag">C#</span>
+                <span class="tag">Azure App Service</span>
+                <span class="tag">GitHub</span>
+                <span class="tag">CI/CD</span>
+                <span class="tag">AI</span>
+            </div>
+        </section>
+
+        <section class="section" id="project">
+            <div class="section-title">
+                <span>Featured project</span>
+                <h2>Enterprise AI Service Desk</h2>
+                <p>A modern concept for intelligent IT support and enterprise automation.</p>
+            </div>
+
+            <div class="card" style="min-height:auto;">
+                <div class="icon">🚀</div>
+                <h3>From code to cloud</h3>
+                <p>
+                    The project demonstrates a complete development journey:
+                    source code → Git repository → Azure deployment → live web application.
+                    It can be extended with authentication, monitoring, APIs,
+                    AI agents and enterprise integrations.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        © @DateTime.Now.Year <strong>Bipeen Sinha</strong> • Enterprise AI Service Desk
+        <br />
+        Built with ASP.NET MVC • Azure • GitHub
+    </footer>
+
+</body>
+</html>
